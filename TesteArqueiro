@@ -1,0 +1,35 @@
+using UnityEngine;
+
+public class TesteArqueiro : MonoBehaviour
+{
+    void Start()
+    {
+        Debug.Log("=== INICIANDO TESTE DO ARQUEIRO ===");
+
+        // Cria um GameObject para o arqueiro
+        GameObject arqueiroObj = new GameObject("ArqueiroTeste");
+        Arqueiro arqueiro = arqueiroObj.AddComponent<Arqueiro>();
+
+        // Configura os valores
+        arqueiro.Nome = "Legolas";
+        arqueiro.Vida = 120;
+        arqueiro.Nivel = 5;
+
+        // Testa os métodos
+        Debug.Log("--- Teste 1: Atirar Flechas ---");
+        arqueiro.AtirarFlecha();
+        arqueiro.AtirarFlecha();
+        arqueiro.AtirarFlecha();
+
+        Debug.Log("--- Teste 2: Usar método Atacar (herdado) ---");
+        arqueiro.Atacar();
+
+        Debug.Log("--- Teste 3: Recarregar ---");
+        arqueiro.RecarregarFlechas(5);
+
+        Debug.Log("--- Teste 4: Ver flechas restantes ---");
+        Debug.Log("Flechas atuais: " + arqueiro.Flechas);
+
+        Debug.Log("=== TESTE FINALIZADO ===");
+    }
+}
