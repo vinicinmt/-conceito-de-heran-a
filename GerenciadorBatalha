@@ -1,0 +1,82 @@
+using UnityEngine;
+using System.Collections;
+
+public class GerenciadorBatalha : MonoBehaviour
+{
+    [Header("Personagens do Jogador")]
+    public Arqueiro arqueiro;
+    public Guerreiro guerreiro;
+    public Mago mago;
+
+    [Header("Inimigos")]
+    public Goblin goblin;
+    public Orc orc;
+
+    void Start()
+    {
+        Debug.Log("=== SISTEMA DE BATALHA INICIADO ===");
+        StartCoroutine(SimularBatalha());
+    }
+
+    IEnumerator SimularBatalha()
+    {
+        yield return new WaitForSeconds(1f);
+
+        Debug.Log("🎯 ARQUEIRO vs GOBLIN");
+        arqueiro.AtirarFlecha();
+        yield return new WaitForSeconds(1f);
+
+        if (goblin != null)
+            goblin.ReceberDano(8);
+        yield return new WaitForSeconds(1f);
+
+        Debug.Log("⚔️ GUERREIRO vs ORC");
+        guerreiro.GolpeEspada();
+        yield return new WaitForSeconds(1f);
+
+        if (orc != null)
+            orc.ReceberDano(12);
+        yield return new WaitForSeconds(1f);
+
+        Debug.Log("🔮 MAGO vs INIMIGOS");
+        mago.LancarFeitico("Raio Elétrico");
+        yield return new WaitForSeconds(1f);
+
+        if (goblin != null)
+            goblin.ReceberDano(15);
+        if (orc != null)
+            orc.ReceberDano(15);
+        yield return new WaitForSeconds(1f);
+
+        Debug.Log("=== BATALHA CONCLUÍDA ===");
+    }
+
+  
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            arqueiro.AtirarFlecha();
+            if (goblin != null) goblin.ReceberDano(10);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            guerreiro.GolpeEspada();
+            if (orc != null) orc.ReceberDano(15);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            mago.LancarFeitico("Nevasca");
+            if (goblin != null) goblin.ReceberDano(12);
+            if (orc != null) orc.ReceberDano(12);
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            arqueiro.RecarregarFlechas(5);
+            mago.Meditar();
+        }
+    }
+}
