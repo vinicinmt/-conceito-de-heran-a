@@ -1,0 +1,46 @@
+using UnityEngine;
+
+public class Mago : Player
+{
+    [SerializeField] private int mana;
+    [SerializeField] private int inteligencia;
+
+    void Start()
+    {
+        if (string.IsNullOrEmpty(Nome))
+            Nome = "Mago";
+
+        if (mana == 0) mana = 100;
+        if (inteligencia == 0) inteligencia = 20;
+
+        Debug.Log($"Mago {Nome} criado! Mana: {mana}, Inteligência: {inteligencia}");
+    }
+
+    public void LancarFeitico(string tipoFeitico)
+    {
+        if (mana >= 10)
+        {
+            mana -= 10;
+            int poder = inteligencia + Random.Range(5, 15);
+            Debug.Log($"{Nome} lançou {tipoFeitico}! Poder: {poder}, Mana restante: {mana}");
+        }
+        else
+        {
+            Debug.Log($"{Nome} não tem mana suficiente para lançar feitiço!");
+        }
+    }
+
+    public void Meditar()
+    {
+        mana += 30;
+        Debug.Log($"{Nome} meditou e recuperou mana! Mana atual: {mana}");
+    }
+
+    public override void Atacar()
+    {
+        LancarFeitico("Bola de Fogo");
+    }
+
+    public int Mana { get => mana; set => mana = value; }
+    public int Inteligencia { get => inteligencia; set => inteligencia = value; }
+}
