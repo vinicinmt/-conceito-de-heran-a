@@ -1,1 +1,0 @@
-# -conceito-de-heran-a

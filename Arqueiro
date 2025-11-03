@@ -1,0 +1,40 @@
+using UnityEngine;
+
+public class Arqueiro : Player
+{
+    [SerializeField] private int flechas = 10;
+
+    void Start()
+    {
+        if (string.IsNullOrEmpty(Nome))
+            Nome = "Arqueiro";
+
+        Debug.Log($"Arqueiro {Nome} criado com {flechas} flechas!");
+    }
+
+    public void AtirarFlecha()
+    {
+        if (flechas > 0)
+        {
+            flechas--;
+            Debug.Log($"{Nome} atirou uma flecha! Flechas restantes: {flechas}");
+        }
+        else
+        {
+            Debug.Log($"{Nome} não tem flechas para atirar!");
+        }
+    }
+
+    public override void Atacar()
+    {
+        AtirarFlecha();
+    }
+
+    public void RecarregarFlechas(int quantidade)
+    {
+        flechas += quantidade;
+        Debug.Log($"{Nome} recarregou {quantidade} flechas. Total: {flechas}");
+    }
+
+    public int Flechas { get => flechas; }
+}
