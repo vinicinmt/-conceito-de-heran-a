@@ -1,0 +1,38 @@
+using UnityEngine;
+
+public class Guerreiro : Player
+{
+    [SerializeField] private int forca;
+    [SerializeField] private int resistencia;
+
+    void Start()
+    {
+        if (string.IsNullOrEmpty(Nome))
+            Nome = "Guerreiro";
+
+        if (forca == 0) forca = 15;
+        if (resistencia == 0) resistencia = 10;
+
+        Debug.Log($"Guerreiro {Nome} criado! Força: {forca}, Resistência: {resistencia}");
+    }
+
+    public void GolpeEspada()
+    {
+        int dano = forca + Random.Range(1, 6);
+        Debug.Log($"{Nome} desferiu golpe de espada! Dano: {dano}");
+    }
+
+    public void Defender()
+    {
+        int defesa = resistencia + 5;
+        Debug.Log($"{Nome} está defendendo! Defesa: {defesa}");
+    }
+
+    public override void Atacar()
+    {
+        GolpeEspada();
+    }
+
+    public int Forca { get => forca; set => forca = value; }
+    public int Resistencia { get => resistencia; set => resistencia = value; }
+}
