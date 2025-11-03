@@ -1,0 +1,17 @@
+using UnityEngine;
+
+public class Player : MonoBehaviour
+{
+    [SerializeField] protected string nome;
+    [SerializeField] protected int vida;
+    [SerializeField] protected int nivel;
+
+    public virtual void Atacar()
+    {
+        Debug.Log($"{nome} atacou!");
+    }
+
+    public string Nome { get => nome; set => nome = value; }
+    public int Vida { get => vida; set => vida = value; }
+    public int Nivel { get => nivel; set => nivel = value; }
+}
