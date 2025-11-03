@@ -1,0 +1,38 @@
+using UnityEngine;
+
+public class Orc : Inimigo
+{
+    [SerializeField] private int forcaBruta;
+
+    void Start()
+    {
+        if (string.IsNullOrEmpty(nomeInimigo))
+            nomeInimigo = "Orc";
+
+        if (vida == 0) vida = 60;
+        if (dano == 0) dano = 8;
+        if (forcaBruta == 0) forcaBruta = 12;
+
+        Debug.Log($"Orc {nomeInimigo} rugiu! Força Bruta: {forcaBruta}");
+    }
+
+    public void GolpePoderoso()
+    {
+        Debug.Log($"{nomeInimigo} prepara um golpe poderoso!");
+    }
+
+    public override void AtacarPlayer(Player player)
+    {
+        int danoFinal = dano + forcaBruta;
+        Debug.Log($"{nomeInimigo} desferiu golpe brutal em {player.Nome} causando {danoFinal} de dano!");
+    }
+
+    public override void ReceberDano(int quantidade)
+    {
+      
+        int danoReduzido = quantidade - 2;
+        if (danoReduzido < 1) danoReduzido = 1;
+
+        base.ReceberDano(danoReduzido);
+    }
+}
