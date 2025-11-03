@@ -1,0 +1,38 @@
+using UnityEngine;
+
+public class Inimigo : MonoBehaviour
+{
+    [SerializeField] protected string nomeInimigo;
+    [SerializeField] protected int vida;
+    [SerializeField] protected int dano;
+
+    void Start()
+    {
+        Debug.Log($"Inimigo {nomeInimigo} apareceu! Vida: {vida}");
+    }
+
+    public virtual void ReceberDano(int quantidade)
+    {
+        vida -= quantidade;
+        Debug.Log($"{nomeInimigo} recebeu {quantidade} de dano! Vida restante: {vida}");
+
+        if (vida <= 0)
+        {
+            Morrer();
+        }
+    }
+
+    public virtual void AtacarPlayer(Player player)
+    {
+        Debug.Log($"{nomeInimigo} atacou {player.Nome} causando {dano} de dano!");
+    }
+
+    protected virtual void Morrer()
+    {
+        Debug.Log($"{nomeInimigo} foi derrotado!");
+        Destroy(gameObject, 1f);
+    }
+
+    public string NomeInimigo { get => nomeInimigo; set => nomeInimigo = value; }
+    public int Vida { get => vida; set => vida = value; }
+}
