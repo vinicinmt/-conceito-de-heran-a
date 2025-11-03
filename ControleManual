@@ -1,0 +1,25 @@
+using UnityEngine;
+
+public class ControleManual : MonoBehaviour
+{
+    private Arqueiro arqueiro;
+
+    void Start()
+    {
+        arqueiro = GetComponent<Arqueiro>();
+        Debug.Log("Controles: ESPAÇO = Atirar, R = Recarregar");
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            arqueiro.AtirarFlecha();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            arqueiro.RecarregarFlechas(2);
+        }
+    }
+}
